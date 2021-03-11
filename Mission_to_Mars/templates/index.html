@@ -21,7 +21,7 @@
                         <hr class='my-4'>
                         <p class='lead'>{{marsFeed.teaser}}</p>
                         <button type="button" class="btn btn-outline-warning btn-lg btn-block"
-                            onclick="window.location.href='/scrape';">Scrape for New Mars Data!</button>
+                            onclick="window.location.href='/scrape';">Scrape for Updated Mars Data!</button>
                     </div>
                 </div>
             </div>
@@ -53,19 +53,23 @@
                 <div class="col-lg-12">
                     <div class='jumbotron'>
                         <h1 class='text-muted'>Mars Hemispheres</h1>
-
+                        {% for row in marsFeed.hemisphere_images|batch(2) %}
                         <div class='col'>
-                            {% for x in marsFeed.hemisphere_images %}
-                            <img class="img-fluid" width="50%" src={{x.image_url}}></img>
-                            <hr class='my-4'>
-                            <h3>{{x.title}}</h3>
+                            {% for col in row %}
+                            <div class='col'>
+                                <img class="img-fluid" src={{col.image_url}}>
+                                <hr class='my-4'>
+                                <h3>{{col.title}}</h3>
+                            </div>
                             {% endfor %}
                         </div>
-
+                        {% endfor %}
                     </div>
 
                 </div>
+
             </div>
+        </div>
     </section>
 </body>
 

@@ -73,7 +73,8 @@ def scrape():
     df = df.rename(columns={1: 'Mars'})
     df.index.name = 'Description'
 
-    marsFeed['mars_facts'] = df.to_html()
+    marsFeed['mars_facts'] = df.to_html(
+        classes='table table-warning table-striped table-hover text-primary')
 
     # Empty dictionary container to hold web scrapes
     hemisphere_image_urls = []
@@ -81,11 +82,11 @@ def scrape():
     # Assign URL string to variable
     url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
 
-    # Send splinter to URL
-    browser.visit(url)
-
     # Tell splinter to click link to navigate to full size photo of first mars image
     for x in range(0, 4):
+
+        # Send splinter to URL
+        browser.visit(url)
 
         # Initialize container to store key:value pairs
         mars_dict = {}
@@ -94,7 +95,7 @@ def scrape():
         browser.find_by_css('h3')[x].click()
 
         # Give the site a few seconds to fully load
-        time.sleep(0.5)
+        time.sleep(1)
 
         # Make a NEW soup object with the HTML where splinter stopped
         html = browser.html
@@ -107,8 +108,8 @@ def scrape():
         # Append Dictionary to List
         hemisphere_image_urls.append(mars_dict)
 
-        # Send splinter back to URL
-        browser.visit(url)
+    # Quit the Browser
+    browser.quit()
 
     # Attachllist of dictionaries to parent dictionary
     marsFeed['hemisphere_images'] = hemisphere_image_urls
