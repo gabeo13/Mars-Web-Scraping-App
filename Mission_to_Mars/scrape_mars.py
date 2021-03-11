@@ -74,7 +74,7 @@ def scrape():
     df.index.name = 'Description'
 
     marsFeed['mars_facts'] = df.to_html(
-        classes='table table-warning table-striped table-hover text-primary')
+        classes='table table-warning table-striped table-hover')
 
     # Empty dictionary container to hold web scrapes
     hemisphere_image_urls = []
@@ -95,7 +95,7 @@ def scrape():
         browser.find_by_css('h3')[x].click()
 
         # Give the site a few seconds to fully load
-        time.sleep(1)
+        time.sleep(2.5)
 
         # Make a NEW soup object with the HTML where splinter stopped
         html = browser.html
