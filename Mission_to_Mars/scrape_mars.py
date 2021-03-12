@@ -95,7 +95,7 @@ def scrape():
         browser.find_by_css('h3')[x].click()
 
         # Give the site a few seconds to fully load
-        time.sleep(2.5)
+        time.sleep(0.5)
 
         # Make a NEW soup object with the HTML where splinter stopped
         html = browser.html
